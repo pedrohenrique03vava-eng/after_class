@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supervisão de Laboratórios</title>
+    <link rel="stylesheet" href="supervisor.css">
+    <link href="https://googleapis.com" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Painel de Supervisão</h1>
+        <p class="subtitle">Dados atualizados em tempo real.</p>
+    </header>
+
+    <div class="card-monitoramento">
+        <table>
+            <thead>
+                <tr>
+                    <th>Usuário</th>
+                    <th>Laboratório</th>
+                    <th>Status</th>
+                    <th>Entrada</th>
+                </tr>
+            </thead>
+            <tbody id="tabela-corpo">
+                <!-- O JavaScript vai preencher aqui -->
+                <tr>
+                    <td colspan="4" style="text-align:center; color: var(--text-secondary);">Carregando dados...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    async function carregarDados() {
+        try {
+            // Substitua pela URL da sua rota no Node.js
+            const resposta = await fetch('/api/acesso');
+            const alunos = await resposta.json();
+
+            const corpoTabela = document.getElementById('tabela-corpo');
+            corpoTabela.innerHTML = ''; // Limpa a mensagem de carregamento
+
+            if (alunos.length === 0) {
+                corpoTabela.innerHTML = '<tr><td colspan="4" style="text-align:center;">Ninguém nos laboratórios.</td></tr>';
+                return;
+            }
+
+            alunos.forEach(aluno => {
+                const linha = `
+                    <tr>
+                        <td>
+                            <div class="user-info">
+                                <span class="user-name">${aluno.nome}</span>
+                                <span class="user-email">${aluno.email}</span>
+                            </div>
+                        </td>
+                        <td><span class="lab-badge">${aluno.laboratorio}</span></td>
+                        <td><span class="status-online">Presente</span></td>
+                        <td>${aluno.horario}</td>
+                    </tr>
+                `;
+                corpoTabela.innerHTML += linha;
+            });
+        } catch (erro) {
+            console.error('Erro ao buscar dados:', erro);
+            document.getElementById('tabela-corpo').innerHTML = '<tr><td colspan="4" style="text-align:center; color: red;">Erro ao carregar dados.</td></tr>';
+        }
+    }
+
+    carregarDados();
+    setInterval(carregarDados, 30000);
+</script>
+</body>
+</html>

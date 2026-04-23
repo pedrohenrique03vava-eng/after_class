@@ -1,0 +1,147 @@
+/* Variáveis para fácil manutenção e harmonia visual */
+:root {
+    --bg-body: #f8fafc;        /* Cinza quase branco, descansa a vista */
+    --card-bg: #ffffff;
+    --text-main: #334155;      /* Azul acinzentado escuro (evita o preto puro) */
+    --text-muted: #64748b;     /* Texto secundário suave */
+    --accent: #6366f1;         /* Indigo suave para detalhes */
+    --success-bg: #f0fdf4;     /* Verde pastel */
+    --success-text: #166534;
+    --border-color: #f1f5f9;
+    --radius: 12px;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    margin: 0;
+    padding: 40px 20px;
+    -webkit-font-smoothing: antialiased;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+header {
+    margin-bottom: 32px;
+}
+
+h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: -0.025em;
+}
+
+.subtitle {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-top: 6px;
+}
+
+/* Estrutura do Card */
+.card-monitoramento {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    overflow: hidden; /* Garante que o hover não saia do arredondamento */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+/* Cabeçalho da Tabela */
+th {
+    background-color: #fcfcfd;
+    padding: 16px 24px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Linhas e Células */
+td {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.9rem;
+    transition: background 0.2s ease;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:hover td {
+    background-color: #fafbfc;
+}
+
+/* Info do Usuário (Nome e Email) */
+.user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.user-name {
+    font-weight: 500;
+    color: var(--text-main);
+}
+
+.user-email {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* Badges e Status */
+.lab-badge {
+    display: inline-block;
+    background-color: #f1f5f9;
+    color: var(--text-main);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-weight: 500;
+}
+
+.status-online {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--success-bg);
+    color: var(--success-text);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* Ponto pulsante discreto de atividade */
+.status-online::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    background-color: var(--success-text);
+    border-radius: 50%;
+    opacity: 0.8;
+}
+
+/* Responsividade Básica */
+@media (max-width: 640px) {
+    .user-email {
+        display: none; /* Simplifica em telas pequenas */
+    }
+    td, th {
+        padding: 12px 16px;
+    }
+}
