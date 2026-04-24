@@ -1,50 +1,50 @@
 import { Sequelize, DataTypes } from "sequelize";
 
-const sequelize = new Sequelize("bd", "root", "", {
+const sequelize = new Sequelize("bd", "root", "9632587410Ph@", {
     dialect: "mysql",
     host: "localhost"
 });
 
+
+
 const Users = sequelize.define('users', {
-    nome: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        defaultValue: "Usuário Novo"
-    },
-    email: {
-        type: DataTypes.STRING,
-        validate: { isEmail: true } 
-    },
-    senha: {
-        type: DataTypes.STRING
-    },
-    data:{
-       type: DataTypes.DATEONLY
-    },
-    tipo:{
-        type:DataTypes.STRING,
-            defaultValue: "aluno"
-        
-    } 
-}, {
-    
-    timestamps: true 
+    nome: { type: DataTypes.STRING, allowNull: false, defaultValue: "Usuário Novo" },
+    email: { type: DataTypes.STRING, validate: { isEmail: true } },
+    senha: { type: DataTypes.STRING },
+    tipo: { type: DataTypes.STRING, defaultValue: "aluno" } 
+});
+
+const Agendamento = sequelize.define('agendamento', {
+    id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
+    nome_lab: { type: DataTypes.STRING, allowNull: false },
+    dataAtividade: { type: DataTypes.DATEONLY, allowNull: false },
+    horario: { type: DataTypes.TIME, allowNull: false },
+    usuarioId: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: 'users',
+            key: 'id'
+        }
+    }
 });
 
 
+Agendamento.belongsTo(Users, { foreignKey: 'usuarioId' });
+Users.hasMany(Agendamento, { foreignKey: 'usuarioId' });
+
 sequelize.authenticate()
     .then(async () => { 
-        console.log("Conexão estabelecida com sucesso.");
+        console.log("Conexão estabelecida.");
       
-        await Users.sync(); 
-        console.log("Tabela de usuários pronta.");
+        
+        await sequelize.sync({ alter: true }); 
+        console.log("Tabelas sincronizadas.");
 
-       
         await criarUsuariosTeste();
     })
     .catch(err => console.error("Erro:", err));
 
-async function criarUsuariosTeste() {
+    async function criarUsuariosTeste() {
     try {
       
 
@@ -68,4 +68,5 @@ async function criarUsuariosTeste() {
 }
 
 
-export default Users;
+
+export  { Users, Agendamento,Sequelize }; 

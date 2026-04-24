@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>After Class - Agendamento</title>
+    <link rel="stylesheet" href="aluno.css">
+</head>
+<body>
+    <!-- Logo menor para o topo da página -->
+    <img src="img/images-removebg-preview.png" alt="Logo After Class" style="width: 80px;">
+
+    <form id="formAgendamento">
+        <h2>Solicitar Laboratório</h2>
+        <p style="text-align: center; color: #557089; margin-bottom: 25px;">Preencha os dados para garantir sua vaga na atividade extra.</p>
+
+        <label>Seu Nome Completo</label>
+        <input type="text" id="nomeAluno" placeholder="Digite seu nome" required>
+
+        <label>Qual laboratório você utilizará?</label>
+        <select id="selectLab" required>
+            <option value="" disabled selected>Selecione um laboratório</option>
+            <option value="informatica_1">Laboratório de Informática 01</option>
+            <option value="informatica_2">Laboratório de Informática 02</option>
+            <option value="informatica_3">Laboratório de Informática 03</option>
+            <option value="informatica_4">Laboratório de Informática 04</option>
+            <option value="informatica_5">Laboratório de Informática 05</option>
+            <option value="maker">Sala Maker</option>
+        </select>
+
+        <div class="pergunta-questionario">
+    <label>Data da Atividade</label>
+    <input type="date" id="dataAtividade" required>
+</div>
+
+<div class="pergunta-questionario">
+    <label>Horário de Início</label>
+    <input type="time" id="horarioAtividade" required>
+</div>
+
+        <button type="submit" id="butEnviar">Enviar para Supervisor</button>
+        <a href="index.html" style="text-align: center; margin-top: 15px; color: #007bff; text-decoration: none; font-size: 14px;">Sair do Sistema</a>
+    </form>
+
+    <script src="aluno.js"></script>
+</body>
+</html>

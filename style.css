@@ -1,71 +1,104 @@
+/* Importando uma fonte moderna e amigável */
 @import url('https://googleapis.com');
 
 body {
     font-family: 'Plus Jakarta Sans', sans-serif;
-    background-color: #f0f7ff;
-    background-image: radial-gradient(at 0% 0%, hsla(210,100%,90%,1) 0, transparent 50%), 
-                      radial-gradient(at 100% 100%, hsla(210,100%,85%,1) 0, transparent 50%);
+    /* Fundo com um degradê azul bem suave e limpo */
+    background: linear-gradient(135deg, #f0f7ff 0%, #e1eeff 100%);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
+/* Estilização da Logo */
 img {
-    width: 120px;
-    margin-bottom: 24px;
-    filter: drop-shadow(0 10px 15px rgba(0, 50, 150, 0.1));
+    width: 100px;
+    height: auto;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 8px 12px rgba(0, 91, 187, 0.15));
 }
 
-#meuForm {
+/* Card do Formulário (Onde a mágica acontece) */
+#formAgendamento, #meuForm {
     background: #ffffff;
-    padding: 45px;
-    border-radius: 30px; 
-    box-shadow: 0 20px 50px rgba(0, 50, 150, 0.08); 
+    padding: 40px;
+    border-radius: 32px; /* Bordas bem arredondadas para parecer amigável */
+    box-shadow: 0 20px 40px rgba(0, 50, 150, 0.06);
     width: 100%;
-    max-width: 380px;
+    max-width: 400px;
     display: flex;
     flex-direction: column;
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.8);
 }
 
+/* Títulos e Textos */
 h2 {
     color: #003d73;
     text-align: center;
-    margin-bottom: 35px;
-    font-size: 28px;
+    margin-bottom: 10px;
+    font-size: 26px;
     font-weight: 700;
 }
 
+p {
+    text-align: center;
+    color: #557089;
+    font-size: 14px;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+/* Labels (Rótulos) */
 label {
     font-size: 13px;
     font-weight: 600;
     color: #557089;
     margin-bottom: 8px;
-    margin-left: 5px;
+    margin-left: 4px;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-input {
+/* Inputs, Selects e campos de texto */
+input, select {
+    width: 100%;
     padding: 16px;
     margin-bottom: 24px;
-    border: 2px solid #eef2f6;
+    border: 2px solid #edf2f7;
     border-radius: 16px;
     font-size: 16px;
     background: #f8fbff;
     color: #002b52;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    box-sizing: border-box;
     transition: all 0.3s ease;
 }
 
-input:focus {
+/* Efeito de Foco nos campos */
+input:focus, select:focus {
     outline: none;
-    border-color: #007bff; 
+    border-color: #007bff;
     background: #ffffff;
     box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1);
 }
 
+/* Estilização específica para o Select (Seta customizada) */
+select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://w3.org' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23007bff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 18px;
+}
 
+/* Botão de Envio (Azul Vibrante) */
 #butEnviar {
     background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
     color: #ffffff;
@@ -75,17 +108,24 @@ input:focus {
     font-size: 16px;
     font-weight: 700;
     cursor: pointer;
-    box-shadow: 0 10px 20px rgba(0, 123, 255, 0.3);
+    box-shadow: 0 10px 20px rgba(0, 123, 255, 0.2);
     transition: all 0.3s ease;
     margin-top: 10px;
 }
 
 #butEnviar:hover {
     transform: translateY(-2px);
-    box-shadow: 0 15px 25px rgba(0, 123, 255, 0.4);
+    box-shadow: 0 15px 25px rgba(0, 123, 255, 0.3);
     filter: brightness(1.1);
 }
 
 #butEnviar:active {
     transform: translateY(0);
+}
+
+/* Estilo para telas de celular */
+@media (max-width: 480px) {
+    #formAgendamento {
+        padding: 30px 20px;
+    }
 }

@@ -3,77 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Supervisão de Laboratórios</title>
+    <title>After Class - Painel do Supervisor</title>
     <link rel="stylesheet" href="supervisor.css">
-    <link href="https://googleapis.com" rel="stylesheet">
 </head>
 <body>
+    <img src="img/images-removebg-preview.png" alt="Logo">
 
-<div class="container">
-    <header>
-        <h1>Painel de Supervisão</h1>
-        <p class="subtitle">Dados atualizados em tempo real.</p>
-    </header>
+    <main class="container-supervisor">
+        <header>
+            <h2>Painel de Supervisão</h2>
+            <p>Selecione um laboratório para gerenciar os agendamentos e alunos.</p>
+        </header>
 
-    <div class="card-monitoramento">
-        <table>
-            <thead>
-                <tr>
-                    <th>Usuário</th>
-                    <th>Laboratório</th>
-                    <th>Status</th>
-                    <th>Entrada</th>
-                </tr>
-            </thead>
-            <tbody id="tabela-corpo">
-                <!-- O JavaScript vai preencher aqui -->
-                <tr>
-                    <td colspan="4" style="text-align:center; color: var(--text-secondary);">Carregando dados...</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+        
+        <div class="grid-labs">
+            <div class="card-lab" onclick="verAlunos('Informatica_01')">
+                <h3>Informática 01</h3>
+                <span></span>
+            </div>
+            <div class="card-lab" onclick="verAlunos('Informatica_02')">
+                <h3>Informática 02</h3>
+                <span></span>
+            </div>
+            <div class="card-lab" onclick="verAlunos('Informatica_03')">
+                <h3>Informatica 03</h3>
+                <span></span>
+            </div>
+            <div class="card-lab" onclick="verAlunos('Informatica_04')">
+                <h3>Informática 04</h3>
+                <span></span>
+            </div>
+            <div class="card-lab" onclick="verAlunos('Informatica_05')">
+                <h3>Informática 05</h3>
+                <span></span>
+            </div>
+        </div>
 
-<script>
-    async function carregarDados() {
-        try {
-            // Substitua pela URL da sua rota no Node.js
-            const resposta = await fetch('/api/acesso');
-            const alunos = await resposta.json();
-
-            const corpoTabela = document.getElementById('tabela-corpo');
-            corpoTabela.innerHTML = ''; // Limpa a mensagem de carregamento
-
-            if (alunos.length === 0) {
-                corpoTabela.innerHTML = '<tr><td colspan="4" style="text-align:center;">Ninguém nos laboratórios.</td></tr>';
-                return;
-            }
-
-            alunos.forEach(aluno => {
-                const linha = `
+        
+        <section id="detalhesLab" class="secao-detalhes">
+            <h3 id="tituloLab">Alunos em: Informatica 01</h3>
+            <table class="tabela-alunos">
+                <thead>
                     <tr>
-                        <td>
-                            <div class="user-info">
-                                <span class="user-name">${aluno.nome}</span>
-                                <span class="user-email">${aluno.email}</span>
-                            </div>
-                        </td>
-                        <td><span class="lab-badge">${aluno.laboratorio}</span></td>
-                        <td><span class="status-online">Presente</span></td>
-                        <td>${aluno.horario}</td>
+                        <th>Aluno</th>
+                        <th>Horário</th>
+                        <th>Atividade</th>
+                        <th>Ações</th>
                     </tr>
-                `;
-                corpoTabela.innerHTML += linha;
-            });
-        } catch (erro) {
-            console.error('Erro ao buscar dados:', erro);
-            document.getElementById('tabela-corpo').innerHTML = '<tr><td colspan="4" style="text-align:center; color: red;">Erro ao carregar dados.</td></tr>';
-        }
-    }
+                </thead>
+                <tbody id="listaAlunos">
+                    
+                    <tr>
+                        <td>EX:Carlos Silva</td>
+                        <td>EX:14:00 - 16:00</td>
+                        <td>EX:Projeto Python</td>
+                        <td><button class="btn-check">Confirmar</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
 
-    carregarDados();
-    setInterval(carregarDados, 30000);
-</script>
+    <script src="supervisor.js"></script>
 </body>
 </html>

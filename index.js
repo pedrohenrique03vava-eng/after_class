@@ -1,71 +1,49 @@
-const enviar = document.getElementById("butEnviar")
+const enviar = document.getElementById("butEnviar");
 
-
-enviar.addEventListener('click', async function(event){ 
+enviar.addEventListener('click', async function(event) { 
     event.preventDefault();
     
-    let email = document.getElementById("loginEmail").value
-    let senha = document.getElementById("loginSenha").value
+    let email = document.getElementById("loginEmail").value;
+    let senha = document.getElementById("loginSenha").value;
 
-    if(!email || !senha){
-        alert("Os dados não podem estar vazios")
+    if(!email || !senha) {
+        alert("Preencha todos os campos!");
         return;
     }
 
-    const dadosEnviar = {
-        email: email,
-        senha: senha
-    }
+    const dadosEnviar = { email, senha };
 
     try {
-        const reponse = await fetch('http://localhost:8083/usuarios', {
+        
+        const response = await fetch('http://localhost:8083/login', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(dadosEnviar)
-        })
+        });
 
-        if(reponse.ok){
-            alert("Dados enviados com sucesso")
+        if(response.ok) {
+            const usuario = await response.json(); 
             
-            setTimeout(() => {
-                 verificarCargo(email); 
-            },500);
+            
+            localStorage.setItem("usuarioLogado", JSON.stringify(usuario));
+
+            alert(`Bem-vindo, ${usuario.nome}!`);
+            
+            // 3. REDIRECIONAMENTO DIRETO SEM BUSCAS EXTRAS
+            if (usuario.tipo === "admin" || usuario.tipo === "supervisor") {
+                window.location.href = "supervisor.html";
+            } else {
+                window.location.href = "aluno.html";
+            }
             
         } else {
-            alert("Erro ao enviar dados")
+            alert("E-mail ou senha incorretos!");
         }
 
-        document.getElementById("loginEmail").value = ""
-        document.getElementById("loginSenha").value = ""
+        document.getElementById("loginEmail").value = "";
+        document.getElementById("loginSenha").value = "";
     
     } catch(err) {
-        console.log("erro ao enviar dados a API")
+        console.error("Erro ao conectar com a API:", err);
     }
-})
-
-async function verificarCargo(emailLogado) {
-    try {
-        const response = await fetch("http://localhost:8083/usuarios");
-        const usuarios = await response.json();
-
-        console.log("Tentando encontrar o email:", `|${emailLogado}|`);
-        console.log("Emails disponíveis no banco:", usuarios.map(u => `|${u.email}|`));
-
-        
-        const usuarioAtual = usuarios.find(u => u.email === emailLogado);
-
-        if (!usuarioAtual) {
-            console.log("Usuário não encontrado na lista da API");
-            return;
-        }
-
-        if (usuarioAtual.tipo === "admin") {
-            window.location.href = "https://www.youtube.com";
-        } else if (usuarioAtual.tipo === "aluno") {
-            window.location.href = "https://www.facebook.com";
-        }
-        
-    } catch (error) {
-        console.error("Erro ao verificar cargo:", error);
-    }
-}
+});

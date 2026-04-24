@@ -1,0 +1,104 @@
+@import url('https://googleapis.com');
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #ffffff; /* Fundo branco limpo */
+    color: #1a1a1a;
+    margin: 0;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Logo no topo, centralizada */
+img {
+    width: 120px;
+    margin-bottom: 40px;
+}
+
+/* O formulário agora ocupa mais espaço, como uma página de documento */
+#formAgendamento {
+    width: 100%;
+    max-width: 800px; /* Largura de um questionário real */
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Cabeçalho do Questionário */
+h2 {
+    font-size: 32px;
+    color: #003d73;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+p {
+    font-size: 18px;
+    color: #64748b;
+    margin-bottom: 48px;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 24px;
+}
+
+/* Seções do Questionário */
+label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 12px;
+    display: block;
+}
+
+/* Inputs e Selects maiores e mais "sérios" */
+input, select {
+    width: 100%;
+    padding: 18px;
+    margin-bottom: 40px; /* Espaço maior entre as perguntas */
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 16px;
+    background: #ffffff;
+    color: #0f172a;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.1);
+}
+
+/* Botão de envio largo e imponente no final */
+#butEnviar {
+    background-color: #007bff;
+    color: white;
+    padding: 20px 40px;
+    border: none;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    align-self: flex-end; /* Botão alinhado à direita no fim da página */
+    transition: all 0.3s ease;
+    width: fit-content;
+}
+
+#butEnviar:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* Estilização para o campo de data específico */
+input[type="date"] {
+    cursor: pointer;
+    font-family: inherit;
+}
+
+/* Responsividade para tablets/celulares */
+@media (max-width: 600px) {
+    h2 { font-size: 24px; }
+    #butEnviar { width: 100%; }
+}
