@@ -1,6 +1,6 @@
 import { Sequelize, DataTypes } from "sequelize";
 
-const sequelize = new Sequelize("bd", "root", "9632587410Ph@", {
+const sequelize = new Sequelize("bd", "root", "", {
     dialect: "mysql",
     host: "localhost"
 });
@@ -19,6 +19,7 @@ const Agendamento = sequelize.define('agendamento', {
     nome_lab: { type: DataTypes.STRING, allowNull: false },
     dataAtividade: { type: DataTypes.DATEONLY, allowNull: false },
     horario: { type: DataTypes.TIME, allowNull: false },
+    motivo: {type: DataTypes.STRING,allowNull:false},
     usuarioId: {
         type: DataTypes.INTEGER,
         references: {

@@ -9,11 +9,12 @@ enviar.addEventListener('click', async function(event) {
         nome_lab: document.querySelector("#selectLab").value,
         dataAtividade: document.querySelector("#dataAtividade").value,
         horario: document.querySelector("#horarioAtividade").value,
-        usuarioId: usuarioLogado ? usuarioLogado.id : null 
+        usuarioId: usuarioLogado ? usuarioLogado.id : null,
+        motivo: document.querySelector("#motivoPermanencia").value
     };
 
     
-    if (!dadosAgendamento.nome_lab || !dadosAgendamento.dataAtividade || !dadosAgendamento.horario) {
+    if (!dadosAgendamento.nome_lab || !dadosAgendamento.dataAtividade || !dadosAgendamento.horario || !dadosAgendamento.motivo) {
         alert("Por favor, preencha todos os campos do questionário.");
         return;
     }

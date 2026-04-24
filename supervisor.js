@@ -1,11 +1,9 @@
-alert = ("dadwadawdwa")
-
 async function verAlunos(nomeLab) {
     try {
         const response = await fetch(`http://localhost:8083/agendamentos-lab?lab=${nomeLab}`);
         const alunos = await response.json();
 
-        // 1. OLHE ISSO NO CONSOLE: Veja se aparece [] ou se aparecem os dados
+
         console.log("Dados que vieram do banco:", alunos);
 
         document.getElementById("tituloLab").innerText = `Alunos em: ${nomeLab.replace('_', ' ')}`;
@@ -18,7 +16,7 @@ async function verAlunos(nomeLab) {
         }
 
         alunos.forEach(agendamento => {
-            // 2. VERIFICAÇÃO DE SEGURANÇA: Se o include falhou, ele pega o ID do usuário como reserva
+            
             const nomeExibicao = agendamento.user ? agendamento.user.nome : `ID Usuário: ${agendamento.usuarioId}`;
             
             corpoTabela.innerHTML += `
@@ -26,6 +24,7 @@ async function verAlunos(nomeLab) {
                     <td>${nomeExibicao}</td>
                     <td>${agendamento.horario || 'Sem hora'}</td>
                     <td>${agendamento.dataAtividade || 'Sem data'}</td>
+                    <td>${agendamento.motivo || 'Sem motivo'}</td>
                     <td><button class="btn-check">Confirmar</button></td>
                 </tr>
             `;

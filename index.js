@@ -29,7 +29,7 @@ enviar.addEventListener('click', async function(event) {
 
             alert(`Bem-vindo, ${usuario.nome}!`);
             
-            // 3. REDIRECIONAMENTO DIRETO SEM BUSCAS EXTRAS
+            
             if (usuario.tipo === "admin" || usuario.tipo === "supervisor") {
                 window.location.href = "supervisor.html";
             } else {
